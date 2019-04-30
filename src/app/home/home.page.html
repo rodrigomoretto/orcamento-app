@@ -1,14 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Orçamentos
     </ion-title>
+    <ion-button slot="end">
+        <ion-icon name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let orcamento of orcamentos">
+      <p>Data: {{ orcamento.data | date: 'dd/MM/yyyy' }}</p>
+      <p>Vendedor: {{ orcamento.vendedor.nome }}</p>
+      <p>Cliente: {{ orcamento.cliente.nome }}</p>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
