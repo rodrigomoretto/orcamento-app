@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes do Orçamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3 padding>Data: {{ orcamento.data | date: 'dd/MM/yyyy' }}</h3>
+ 
+  <h3 padding>Cliente: {{ orcamento.cliente.nome }}</h3>
+
+  <h3 padding>Produtos</h3>
+  <ion-list>
+    <ion-card *ngFor="let produto of orcamento.itens">
+      <p>Nome: {{ produto.produto.titulo }}</p>
+      <p>Quantidade: {{ produto.quantidade }}</p>
+      <p>Valor: {{ produto.valor }}</p>
+    </ion-card>
+  </ion-list>
+  
+  <h3 padding>Vendedor: {{ orcamento.vendedor.nome }} </h3>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-title>Total: R$ {{ orcamento.total }}</ion-title>
+  </ion-toolbar>
+</ion-footer>
