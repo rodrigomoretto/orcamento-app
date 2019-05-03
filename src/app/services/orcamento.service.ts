@@ -18,4 +18,6 @@ export class OrcamentoService {
   listaOrcamento() {
     return this._http.get<Orcamento[]>(this._url + 'orcamento');
   }
+
+  salvaOrcamento() {}
 }
