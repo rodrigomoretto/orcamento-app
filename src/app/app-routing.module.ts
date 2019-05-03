@@ -6,6 +6,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'detalhes-orcamento', loadChildren: './pages/detalhes-orcamento/detalhes-orcamento.module#DetalhesOrcamentoPageModule' },
   { path: 'cadastro-orcamento', loadChildren: './pages/cadastro-orcamento/cadastro-orcamento.module#CadastroOrcamentoPageModule' },
+  { path: 'lista-clientes', loadChildren: './pages/lista-clientes/lista-clientes.module#ListaClientesPageModule' },
+  { path: 'lista-vendedores', loadChildren: './pages/lista-vendedores/lista-vendedores.module#ListaVendedoresPageModule' },
 ];
 
 @NgModule({

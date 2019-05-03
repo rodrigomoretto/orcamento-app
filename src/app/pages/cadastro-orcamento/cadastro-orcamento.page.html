@@ -19,7 +19,7 @@
           </ion-item>
           <ion-item>
             <ion-input name="cliente" placeholder="Cliente" disabled></ion-input>
-            <ion-button color="light">
+            <ion-button [routerLink]="['/lista-clientes']" color="light">
               <ion-icon name="arrow-round-forward"></ion-icon>
             </ion-button>
           </ion-item>
@@ -30,7 +30,7 @@
             </ion-item>
             <ion-item>
               <ion-input name="vendedor" placeholder="Vendedor" disabled></ion-input>
-              <ion-button color="light">
+              <ion-button [routerLink]="['/lista-vendedores']" color="light">
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>
             </ion-item>
@@ -53,6 +53,6 @@
 <ion-footer>
   <ion-toolbar>
       <ion-title>Total: R$ </ion-title>
-      <ion-button expand="full">Salvar Orçamento</ion-button>
+      <ion-button expand="full" (click)="formulario.ngSubmit.emit()">Salvar Orçamento</ion-button>
   </ion-toolbar>
 </ion-footer>

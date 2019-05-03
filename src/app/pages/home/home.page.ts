@@ -26,25 +26,25 @@ export class HomePage implements OnInit {
 
     ngOnInit(): void {
       this._orcamentoService.listaOrcamento()
-              .subscribe(
-                (orcamentos) => {
-                  this.orcamentos = orcamentos;
-                  //loading.dismiss();
-                },
-                (err: HttpErrorResponse) => {
-                  console.log(err);
+        .subscribe(
+          (orcamentos) => {
+            this.orcamentos = orcamentos;
+            //loading.dismiss();
+          },
+          (err: HttpErrorResponse) => {
+            console.log(err);
 
-                  //loading.dismiss();
+            //loading.dismiss();
 
-                  // this._alertCtrl.create({
-                  //   title: 'Falha na conexao',
-                  //   subTitle: 'Nao foi possivel carregar a lista de carros. Tente novamente mais tarde!',
-                  //   buttons: [
-                  //     { text:'Ok' }
-                  //   ]
-                  // }).present();
-                }
-              );
+            // this._alertCtrl.create({
+            //   title: 'Falha na conexão',
+            //   subTitle: 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!',
+            //   buttons: [
+            //     { text:'Ok' }
+            //   ]
+            // }).present();
+          }
+        );
     }
     selecionaOrcamento(orcamento: Orcamento) {
 
