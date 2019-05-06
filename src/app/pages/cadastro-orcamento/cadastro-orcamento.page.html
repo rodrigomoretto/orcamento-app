@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="cadastraOrcamento()" #formulario="ngForm">
+  <form (ngSubmit)="cadastroOrcamento()" #formulario="ngForm">
     <ion-grid>
       <ion-row>
         <ion-col class="ion-margin-top">
@@ -18,8 +18,8 @@
             <ion-label>Selecione um cliente</ion-label>
           </ion-item>
           <ion-item>
-            <ion-input name="cliente" placeholder="Cliente" disabled></ion-input>
-            <ion-button [routerLink]="['/lista-clientes']" color="light">
+            <ion-input name="cliente" disabled> {{ cliente.nome }} </ion-input>
+            <ion-button (click)="listaClientes()" color="light">
               <ion-icon name="arrow-round-forward"></ion-icon>
             </ion-button>
           </ion-item>
@@ -29,8 +29,8 @@
               <ion-label>Selecione um vendedor</ion-label>
             </ion-item>
             <ion-item>
-              <ion-input name="vendedor" placeholder="Vendedor" disabled></ion-input>
-              <ion-button [routerLink]="['/lista-vendedores']" color="light">
+              <ion-input name="vendedor" disabled>{{ vendedor.nome }}</ion-input>
+              <ion-button (click)="listaVendedores()" color="light">
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>
             </ion-item>

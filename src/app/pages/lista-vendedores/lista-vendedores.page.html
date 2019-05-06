@@ -1,15 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="voltaOrcamento()">
+        <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
     <ion-title>Vendedores</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let vendedor of vendedores">
+    <ion-item *ngFor="let vendedor of vendedores" (click)="selecionaVendedor(vendedor)">
       Nome: {{vendedor.nome}}
     </ion-item>
   </ion-list>

@@ -11,6 +11,8 @@ import { OrcamentoService } from './services/orcamento.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ListaClientesPageModule } from './pages/lista-clientes/lista-clientes.module';
+import { ListaVendedoresPageModule } from './pages/lista-vendedores/lista-vendedores.module';
 
 
 @NgModule({
@@ -20,7 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-  HttpClientModule],
+    HttpClientModule,
+    ListaClientesPageModule,
+    ListaVendedoresPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

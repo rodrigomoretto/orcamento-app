@@ -17,4 +17,9 @@ export class ClienteService {
   listaClientes() {
     return this._http.get<Cliente[]>(this._url + 'cliente');
   }
+
+  cadastraCliente(cliente: string) {
+    return this._http
+      .post(this._url + 'cliente', cliente);
+  }
 }

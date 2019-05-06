@@ -1,15 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="voltaOrcamento()">
+      <!-- <ion-back-button> -->
+        <ion-icon name="arrow-back"></ion-icon>
+      <!-- </ion-back-button> -->
+    </ion-button>  
     <ion-title>Clientes</ion-title>
+    <ion-button slot="end" (click)="novoCliente()">
+        <ion-icon name="person-add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let cliente of clientes">
+    <ion-item *ngFor="let cliente of clientes" (click)="selecionaCliente(cliente)">
       Nome: {{cliente.nome}}
     </ion-item>
   </ion-list>

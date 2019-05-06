@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vendedor } from 'src/app/models/vendedor';
 import { VendedorService } from 'src/app/services/vendedor.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista-vendedores',
@@ -11,9 +12,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ListaVendedoresPage implements OnInit {
 
   vendedores: Vendedor[];
+  vendedor: Vendedor
 
   constructor(
-    private _vendedorService: VendedorService
+    private _vendedorService: VendedorService,
+    private _modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -26,6 +29,15 @@ export class ListaVendedoresPage implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  selecionaVendedor(vendedor: Vendedor) {
+    this._modalController.dismiss(vendedor);
+  }
+
+  voltaOrcamento() {
+    // this._navController.back();
+      this._modalController.dismiss(this.vendedor);
   }
 
 }
