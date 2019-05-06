@@ -19,7 +19,13 @@ export class ClienteService {
   }
 
   cadastraCliente(cliente: string) {
+    let clienteNovo = {
+      nome: cliente
+    };
     return this._http
-      .post(this._url + 'cliente', cliente);
+      .post(this._url + 'cliente', clienteNovo)
+      .subscribe(data => {}, error => {
+        console.log(error);
+      });
   }
 }

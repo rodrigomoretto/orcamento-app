@@ -28,25 +28,7 @@ export class ListaClientesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._clienteService.listaClientes()
-      .subscribe(
-        (clientes) => {
-          this.clientes = clientes;
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err);
-        }
-      );
-
-    
-    //outra configuração do back button
-    // const event = fromEvent(document, 'backbutton');
-    // this.backbuttonSubscription = event.subscribe(async () => {
-    //     const modal = await this._modalController.getTop();
-    //     if (modal) {
-    //         modal.dismiss();
-    //     }
-    // });
+    this.atualizaClientes();
 
   }
 
@@ -55,9 +37,9 @@ export class ListaClientesPage implements OnInit {
   }
 
   voltaOrcamento() {
-    // this._navController.back();
       this._modalController.dismiss(this.cliente);
   }
+
 
   async novoCliente() {
     const alerta = await this._alertController.create({
@@ -71,31 +53,41 @@ export class ListaClientesPage implements OnInit {
       ],
       buttons: [
         {
+
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
             console.log('Confirmar cancelar');
           }
         },
+
         {
           text: 'Salvar',
           handler: data => {
             console.log('Confirmar Salvar');
-            if(typeof data.nome!=null){
-              // this.name = data.nome;
+            if(typeof data.nome!=null) {
               this._clienteService.cadastraCliente(data.nome);
+              this.atualizaClientes();
               console.log('data nome cliente novo: ', data.nome);
             }
           }
         }
+
       ]
     });
     await alerta.present();
   }
 
-  //outra configuração do back button
-  // ngOnDestroy() {
-  //   this.backbuttonSubscription.unsubscribe();
-  // }
+  atualizaClientes() {
+    this._clienteService.listaClientes()
+      .subscribe(
+        data => {
+          this.clientes = data;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
+  }
 
 }
