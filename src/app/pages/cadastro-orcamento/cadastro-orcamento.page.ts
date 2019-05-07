@@ -31,6 +31,7 @@ export class CadastroOrcamentoPage implements OnInit {
 
   ngOnInit() {
     console.log(this.cliente);
+    console.log(this.vendedor);
   }
 
   cadastroOrcamento() {

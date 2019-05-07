@@ -29,7 +29,6 @@ export class ListaClientesPage implements OnInit {
 
   ngOnInit() {
     this.atualizaClientes();
-
   }
 
   selecionaCliente(cliente: Cliente) {
@@ -66,8 +65,12 @@ export class ListaClientesPage implements OnInit {
           handler: data => {
             console.log('Confirmar Salvar');
             if(typeof data.nome!=null) {
-              this._clienteService.cadastraCliente(data.nome);
-              this.atualizaClientes();
+              this._clienteService.cadastraCliente(data.nome)
+                .subscribe(data => {
+                  this.atualizaClientes();
+                }, error => {
+                  console.log('Erro ao cadastrar o cliemte', error);
+                });
               console.log('data nome cliente novo: ', data.nome);
             }
           }

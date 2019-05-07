@@ -23,9 +23,6 @@ export class ClienteService {
       nome: cliente
     };
     return this._http
-      .post(this._url + 'cliente', clienteNovo)
-      .subscribe(data => {}, error => {
-        console.log(error);
-      });
+      .post(this._url + 'cliente', clienteNovo);
   }
 }
