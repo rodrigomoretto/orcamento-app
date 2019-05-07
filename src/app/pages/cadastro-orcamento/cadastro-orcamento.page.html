@@ -38,10 +38,16 @@
 
           <ion-item lines="none">
             <ion-label>Produtos</ion-label>
-            <ion-button color="light">
+            <ion-button (click)="listaProdutos()" color="light">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-list>
+            <ion-card *ngFor="let produto of produtos">
+              <p>Nome: {{ produto.titulo }} </p>
+              <p>Preço: {{ produto.preco }} </p>
+            </ion-card>
+          </ion-list>
 
 
         </ion-col>

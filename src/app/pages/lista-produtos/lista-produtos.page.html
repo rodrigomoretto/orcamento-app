@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-button slot="start" (click)="voltaOrcamento()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    <ion-title>Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let produto of produtos" (click)="selecionaProduto(produto)">
+      <h5 padding>Nome: {{ produto.titulo }} </h5>
+      <h5 padding>Preço: {{ produto.preco | currency:'BRL':true:'1.2-2' }} </h5>
+    </ion-card>
+  </ion-list>
+</ion-content>

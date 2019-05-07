@@ -36,8 +36,7 @@ export class ListaVendedoresPage implements OnInit {
   }
 
   voltaOrcamento() {
-    // this._navController.back();
-      this._modalController.dismiss(this.vendedor);
+    this._modalController.dismiss(this.vendedor);
   }
 
 }

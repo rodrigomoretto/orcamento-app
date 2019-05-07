@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'cadastro-orcamento', loadChildren: './pages/cadastro-orcamento/cadastro-orcamento.module#CadastroOrcamentoPageModule' },
   { path: 'lista-clientes', loadChildren: './pages/lista-clientes/lista-clientes.module#ListaClientesPageModule' },
   { path: 'lista-vendedores', loadChildren: './pages/lista-vendedores/lista-vendedores.module#ListaVendedoresPageModule' },
+  { path: 'lista-produtos', loadChildren: './pages/lista-produtos/lista-produtos.module#ListaProdutosPageModule' },
 ];
 
 @NgModule({
