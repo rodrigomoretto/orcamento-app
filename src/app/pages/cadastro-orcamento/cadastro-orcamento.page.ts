@@ -8,6 +8,7 @@ import { Vendedor } from 'src/app/models/vendedor';
 import { ListaVendedoresPage } from '../lista-vendedores/lista-vendedores.page';
 import { Produto } from 'src/app/models/produto';
 import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
+import { Orcamento } from 'src/app/models/orcamento';
 
 @Component({
   selector: 'app-cadastro-orcamento',
@@ -28,6 +29,12 @@ export class CadastroOrcamentoPage implements OnInit {
 
   produto: Produto;
   produtos: Array<Produto> = [];
+
+  produtosTotal: Array<number>;
+
+  orcamento: Orcamento;
+
+  quantidade: number = 1;
 
   constructor(
     private _navController: NavController,
@@ -91,13 +98,35 @@ export class CadastroOrcamentoPage implements OnInit {
       .then((data) => {
         if (data.data != null) {
           this.produto = data['data'];
+          this.produto.quantidade = 1;
           this.produtos.push(this.produto);
           console.log('produtos no diddismiss: ', this.produtos);
+          console.log('orcamento: ', this.produtos);
         }
     });
     console.log('produtos fora: ', this.produtos);
 
     return await modal.present();
   }
+
+  atualizaQuantidadeProduto() {}
+
+  quantidadeProdutoMais(produto: Produto) {
+    console.log(produto);
+    if(produto.quantidade > 0) {
+      produto.quantidade += 1;
+      console.log(produto);
+    }
+  }
+
+  quantidadeProdutoMenos(produto: Produto) {
+    console.log(produto);
+    if(produto.quantidade > 1) {
+      produto.quantidade -= 1;
+      console.log(produto);
+    }
+  }
+
+  totalNaView() {}
 
 }
