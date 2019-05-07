@@ -36,7 +36,7 @@ export class ListaClientesPage implements OnInit {
   }
 
   voltaOrcamento() {
-      this._modalController.dismiss(this.cliente);
+      this._modalController.dismiss(null);
   }
 
 

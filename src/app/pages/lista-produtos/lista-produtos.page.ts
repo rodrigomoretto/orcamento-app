@@ -38,11 +38,6 @@ export class ListaProdutosPage implements OnInit {
   }
 
   voltaOrcamento() {
-    console.log('produto no modal: ', this.produto);
-    if(this.produto != null) {
-      console.log('entrou no if, produto no if: ', this.produto);
-      this._modalController.dismiss(this.produto);
-    }
     this._modalController.dismiss(null);
   }
 

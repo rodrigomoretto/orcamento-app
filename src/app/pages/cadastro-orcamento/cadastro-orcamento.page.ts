@@ -53,8 +53,9 @@ export class CadastroOrcamentoPage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        this.cliente= data['data'];
-        console.log('data cliente: ', data);
+        if(data.data != null){
+          this.cliente = data['data'];
+        }
         console.log('cliente no dididismiss: ', this.cliente);
     });
     console.log('cliente fora', this.cliente);
@@ -70,8 +71,9 @@ export class CadastroOrcamentoPage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        this.vendedor = data['data'];
-        console.log('data vendedor: ', data);
+        if(data.data != null){
+          this.vendedor = data['data'];
+        }
         console.log('vendedor no diddismiss: ', this.vendedor);
     });
     console.log('vendedor fora: ', this.vendedor);
@@ -87,12 +89,9 @@ export class CadastroOrcamentoPage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        // console.log('data: ', data);
-        // console.log('data.data: ',data.data);
         if (data.data != null) {
           this.produto = data['data'];
           this.produtos.push(this.produto);
-        //   console.log('data produto: ', data);
           console.log('produtos no diddismiss: ', this.produtos);
         }
     });
