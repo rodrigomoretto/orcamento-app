@@ -78,7 +78,7 @@
 
 <ion-footer>
   <ion-toolbar>
-      <ion-title>Total: R$ </ion-title>
+      <ion-title>Total: {{ produtosTotal | currency:'BRL':"symbol":'1.2-2' }} </ion-title>
       <ion-button expand="full" (click)="formulario.ngSubmit.emit()">Salvar Orçamento</ion-button>
   </ion-toolbar>
 </ion-footer>

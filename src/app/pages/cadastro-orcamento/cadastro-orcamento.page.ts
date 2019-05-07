@@ -9,6 +9,7 @@ import { ListaVendedoresPage } from '../lista-vendedores/lista-vendedores.page';
 import { Produto } from 'src/app/models/produto';
 import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
 import { Orcamento } from 'src/app/models/orcamento';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-cadastro-orcamento',
@@ -30,7 +31,7 @@ export class CadastroOrcamentoPage implements OnInit {
   produto: Produto;
   produtos: Array<Produto> = [];
 
-  produtosTotal: Array<number>;
+  produtosTotal: number = 0;
 
   orcamento: Orcamento;
 
@@ -127,6 +128,14 @@ export class CadastroOrcamentoPage implements OnInit {
     }
   }
 
-  totalNaView() {}
+  totalNaView() {
+    if(this.produtos != null) {
+      this.produtos.forEach(
+        (produto: Produto) => {
+          // todo
+        }
+      )
+    }
+  }
 
 }
