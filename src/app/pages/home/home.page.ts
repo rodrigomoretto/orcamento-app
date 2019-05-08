@@ -24,36 +24,40 @@ export class HomePage implements OnInit {
     private _router: Router
     ) { }
 
-    ngOnInit(): void {
-      this._orcamentoService.listaOrcamento()
-        .subscribe(
-          (orcamentos) => {
-            this.orcamentos = orcamentos;
-            //loading.dismiss();
-          },
-          (err: HttpErrorResponse) => {
-            console.log(err);
+  ngOnInit(): void {
+    this.atualizaOrcamentos();
+  }
+  selecionaOrcamento(orcamento: Orcamento) {
 
-            //loading.dismiss();
+    let navigationExtras: NavigationExtras = {
+      state: {
+        orcamento: orcamento
+      }
+    };
+    this._router.navigate(['detalhes-orcamento'], navigationExtras);
+  }
 
-            // this._alertCtrl.create({
-            //   title: 'Falha na conexão',
-            //   subTitle: 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!',
-            //   buttons: [
-            //     { text:'Ok' }
-            //   ]
-            // }).present();
-          }
-        );
-    }
-    selecionaOrcamento(orcamento: Orcamento) {
+  atualizaOrcamentos() {
+    this._orcamentoService.listaOrcamento()
+      .subscribe(
+        (orcamentos) => {
+          this.orcamentos = orcamentos;
+          //loading.dismiss();
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
 
-      let navigationExtras: NavigationExtras = {
-        state: {
-          orcamento: orcamento
+          //loading.dismiss();
+
+          // this._alertCtrl.create({
+          //   title: 'Falha na conexão',
+          //   subTitle: 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!',
+          //   buttons: [
+          //     { text:'Ok' }
+          //   ]
+          // }).present();
         }
-      };
-      this._router.navigate(['detalhes-orcamento'], navigationExtras);
-    }
+      );
+  }
 
 }

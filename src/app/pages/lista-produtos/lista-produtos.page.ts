@@ -21,16 +21,7 @@ export class ListaProdutosPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._produtoService.listaProdutos()
-      .subscribe(
-        (produtos: Array<Produto>) => {
-          this.produtos = produtos;
-          console.log(this.produtos);
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err);
-        }
-      );
+    this.atualizaProdutos();
   }
 
   selecionaProduto(produto: Produto) {
@@ -41,4 +32,15 @@ export class ListaProdutosPage implements OnInit {
     this._modalController.dismiss(null);
   }
 
+  atualizaProdutos() {
+    this._produtoService.listaProdutos()
+      .subscribe(
+        (produtos: Array<Produto>) => {
+          this.produtos = produtos;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
+  }
 }

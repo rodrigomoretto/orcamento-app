@@ -20,6 +20,18 @@ export class ListaVendedoresPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.atualizaVendedores();
+  }
+
+  selecionaVendedor(vendedor: Vendedor) {
+    this._modalController.dismiss(vendedor);
+  }
+
+  voltaOrcamento() {
+    this._modalController.dismiss(null);
+  }
+
+  atualizaVendedores() {
     this._vendedorService.listaVendedores()
       .subscribe(
         (vendedores) => {
@@ -29,14 +41,6 @@ export class ListaVendedoresPage implements OnInit {
           console.log(err);
         }
       );
-  }
-
-  selecionaVendedor(vendedor: Vendedor) {
-    this._modalController.dismiss(vendedor);
-  }
-
-  voltaOrcamento() {
-    this._modalController.dismiss(null);
   }
 
 }
