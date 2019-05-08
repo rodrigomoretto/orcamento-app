@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { ListaClientesPage } from '../lista-clientes/lista-clientes.page';
 import { Cliente } from 'src/app/models/cliente';
 import { ActivatedRoute } from '@angular/router';
@@ -40,13 +40,12 @@ export class CadastroOrcamentoPage implements OnInit {
   constructor(
     private _navController: NavController,
     private _modalController: ModalController,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _alertController: AlertController
   ) { }
 
   ngOnInit() {
-    console.log(this.cliente);
-    console.log(this.vendedor);
-    console.log(this.produtos);
+    this.totalNaView();
   }
 
   cadastroOrcamento() {
@@ -64,9 +63,7 @@ export class CadastroOrcamentoPage implements OnInit {
         if(data.data != null){
           this.cliente = data['data'];
         }
-        console.log('cliente no dididismiss: ', this.cliente);
     });
-    console.log('cliente fora', this.cliente);
 
     return await modal.present();
   }
@@ -82,9 +79,7 @@ export class CadastroOrcamentoPage implements OnInit {
         if(data.data != null){
           this.vendedor = data['data'];
         }
-        console.log('vendedor no diddismiss: ', this.vendedor);
     });
-    console.log('vendedor fora: ', this.vendedor);
 
     return await modal.present();
   }
@@ -101,40 +96,42 @@ export class CadastroOrcamentoPage implements OnInit {
           this.produto = data['data'];
           this.produto.quantidade = 1;
           this.produtos.push(this.produto);
-          console.log('produtos no diddismiss: ', this.produtos);
-          console.log('orcamento: ', this.produtos);
+          this.totalNaView();
         }
     });
-    console.log('produtos fora: ', this.produtos);
 
     return await modal.present();
   }
 
-  atualizaQuantidadeProduto() {}
-
   quantidadeProdutoMais(produto: Produto) {
-    console.log(produto);
     if(produto.quantidade > 0) {
       produto.quantidade += 1;
-      console.log(produto);
+      this.totalNaView();
     }
   }
 
   quantidadeProdutoMenos(produto: Produto) {
-    console.log(produto);
     if(produto.quantidade > 1) {
       produto.quantidade -= 1;
-      console.log(produto);
+      this.totalNaView();
     }
   }
 
+  removeProduto(indice: number) {
+    this.produtos.splice(indice, 1);
+    this.totalNaView();
+    console.log(this.produtos);
+  }
+
   totalNaView() {
+    let total: number = 0;
     if(this.produtos != null) {
       this.produtos.forEach(
         (produto: Produto) => {
-          // todo
+          total += (produto.preco) * (produto.quantidade);
         }
-      )
+      );
+      this.produtosTotal = total;
     }
   }
 
