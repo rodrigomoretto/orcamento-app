@@ -43,7 +43,7 @@
             </ion-button>
           </ion-item>
           <ion-list>
-            <ion-card *ngFor="let produto of produtos; let key = index">
+            <ion-card *ngFor="let produto of produtos; let key = index, let produto">
               <ion-grid>
                 <ion-row>
 
@@ -63,7 +63,7 @@
                     <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="light">
                       <ion-icon name="remove"></ion-icon>
                     </ion-button>
-                    <ion-button size="small" color="light" (click)="removeProduto(key)">
+                    <ion-button size="small" color="light" (click)="removeProduto(key, produto)">
                       <ion-icon name="trash"></ion-icon>
                     </ion-button>
                   </ion-col>

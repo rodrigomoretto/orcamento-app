@@ -117,8 +117,28 @@ export class CadastroOrcamentoPage implements OnInit {
     }
   }
 
-  removeProduto(indice: number) {
-    this.produtos.splice(indice, 1);
+  async removeProduto(indice: number, produto: Produto) {
+    console.log(produto);
+    const alerta = await this._alertController.create({
+      header: 'Aviso',
+      message: 'Tem certeza que deseja remover o produto ' + produto.titulo + ' ?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log(indice);
+            this.produtos.splice(indice, 1);
+            this.totalNaView();
+          }
+        }
+      ]
+    });
+    await alerta.present();
+
     this.totalNaView();
     console.log(this.produtos);
   }
