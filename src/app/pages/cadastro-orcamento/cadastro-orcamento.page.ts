@@ -10,6 +10,7 @@ import { Produto } from 'src/app/models/produto';
 import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
 import { Orcamento } from 'src/app/models/orcamento';
 import { forEach } from '@angular/router/src/utils/collection';
+import { OrcamentoService } from 'src/app/services/orcamento.service';
 
 @Component({
   selector: 'app-cadastro-orcamento',
@@ -33,7 +34,12 @@ export class CadastroOrcamentoPage implements OnInit {
 
   produtosTotal: number = 0;
 
-  orcamento: Orcamento;
+  orcamento: Orcamento = {
+    cliente: 0,
+    vendedor: 0,
+    total: 0,
+    produtos: []
+  };
 
   quantidade: number = 1;
 
@@ -41,7 +47,8 @@ export class CadastroOrcamentoPage implements OnInit {
     private _navController: NavController,
     private _modalController: ModalController,
     private _activatedRoute: ActivatedRoute,
-    private _alertController: AlertController
+    private _alertController: AlertController,
+    private _orcamentoService: OrcamentoService
   ) { }
 
   ngOnInit() {
@@ -49,6 +56,49 @@ export class CadastroOrcamentoPage implements OnInit {
   }
 
   cadastroOrcamento() {
+
+    if (this.cliente.id === 0) {
+      this.mensageiro('Sem cliente', 'Selecione um cliente.');
+    } else if (this.vendedor.id === 0) {
+      this.mensageiro('Sem vendedor', 'Selecione um vendedor.');
+    } else if (this.produtosTotal === 0) {
+      this.mensageiro('Sem produtos', 'Selecione pelo menos um produto.');
+    }
+
+    if (
+      this.cliente.id !== 0 &&
+      this.vendedor.id !== 0 &&
+      this.produtosTotal !== 0 &&
+      this.produtos !== null
+    ) {
+      let orcamento = {
+        cliente: this.cliente.id,
+        vendedor: this.vendedor.id,
+        total: this.produtosTotal,
+        produtos: []
+      };
+
+      this.produtos.forEach(produto => {
+        orcamento.produtos.push({
+          id: produto.id,
+          valor: produto.preco,
+          quantidade: produto.quantidade
+        });
+      });
+
+      console.log(orcamento);
+
+      this._orcamentoService.salvaOrcamento(orcamento)
+      .subscribe(data => {
+        console.log(data);
+        console.log('Orcamento cadastrado');
+        this.mensageiro('Parabéns', 'Orçamento cadastrado com sucesso.');
+        this._navController.navigateRoot('home');
+      }, error => {
+        this.mensageiro('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
+        console.log('Erro ao cadastrar o orçamento', error);
+      });
+    }
 
   }
 
@@ -60,10 +110,10 @@ export class CadastroOrcamentoPage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        if(data.data != null){
+        if (data.data != null) {
           this.cliente = data['data'];
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -76,10 +126,10 @@ export class CadastroOrcamentoPage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        if(data.data != null){
+        if (data.data != null) {
           this.vendedor = data['data'];
         }
-    });
+      });
 
     return await modal.present();
   }
@@ -98,23 +148,37 @@ export class CadastroOrcamentoPage implements OnInit {
           this.produtos.push(this.produto);
           this.totalNaView();
         }
-    });
+      });
 
     return await modal.present();
   }
 
   quantidadeProdutoMais(produto: Produto) {
-    if(produto.quantidade > 0) {
+    if (produto.quantidade > 0) {
       produto.quantidade += 1;
       this.totalNaView();
     }
   }
 
   quantidadeProdutoMenos(produto: Produto) {
-    if(produto.quantidade > 1) {
+    if (produto.quantidade > 1) {
       produto.quantidade -= 1;
       this.totalNaView();
     }
+  }
+
+  async mensageiro(header: string, message: string) {
+    const alerta = await this._alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        },
+      ]
+    });
+    await alerta.present();
   }
 
   async removeProduto(indice: number, produto: Produto) {
@@ -145,11 +209,10 @@ export class CadastroOrcamentoPage implements OnInit {
 
   totalNaView() {
     let total: number = 0;
-    if(this.produtos != null) {
-      this.produtos.forEach(
-        (produto: Produto) => {
-          total += (produto.preco) * (produto.quantidade);
-        }
+    if (this.produtos != null) {
+      this.produtos.forEach(produto => {
+        total += produto.preco * produto.quantidade;
+      }
       );
       this.produtosTotal = total;
     }

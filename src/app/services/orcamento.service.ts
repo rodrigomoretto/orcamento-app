@@ -19,5 +19,8 @@ export class OrcamentoService {
     return this._http.get<Orcamento[]>(this._url + 'orcamento');
   }
 
-  salvaOrcamento() {}
+  salvaOrcamento(orcamento: Orcamento) {
+    return this._http
+      .post(this._url + 'orcamento', orcamento);
+  }
 }

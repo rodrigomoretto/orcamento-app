@@ -58,7 +58,7 @@
                       <ion-icon name="add"></ion-icon>
                     </ion-button>
                     <div>
-                      <ion-label start>Qtd.: {{ produto.quantidade }} </ion-label>
+                      <ion-label start>{{ produto.quantidade }} </ion-label>
                     </div>
                     <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="light">
                       <ion-icon name="remove"></ion-icon>
@@ -83,6 +83,6 @@
 <ion-footer>
   <ion-toolbar>
       <p>Total do Orçamento: {{ produtosTotal | currency:'BRL':"symbol":'1.2-2' }} </p>
-      <ion-button expand="full" (click)="formulario.ngSubmit.emit()">Salvar Orçamento</ion-button>
+      <ion-button expand="full" (click)="formulario.ngSubmit.emit()" >Salvar Orçamento</ion-button>
   </ion-toolbar>
 </ion-footer>
