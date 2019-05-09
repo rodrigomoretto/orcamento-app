@@ -17,7 +17,7 @@
     <ion-card *ngFor="let produto of orcamento.itens">
       <p>Nome: {{ produto.produto.titulo }}</p>
       <p>Quantidade: {{ produto.quantidade }}</p>
-      <p>Valor: {{ produto.valor }}</p>
+      <p>Valor: {{ produto.valor | currency:'BRL':"symbol":'1.2-2' }}</p>
     </ion-card>
   </ion-list>
   
@@ -26,6 +26,6 @@
 
 <ion-footer>
   <ion-toolbar>
-      <ion-title>Total: R$ {{ orcamento.total }}</ion-title>
+      <h3>Total: {{ orcamento.total | currency:'BRL':"symbol":'1.2-2' }}</h3>
   </ion-toolbar>
 </ion-footer>

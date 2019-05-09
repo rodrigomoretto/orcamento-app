@@ -22,7 +22,7 @@
             <p>Cliente: {{ orcamento.cliente.nome }} </p>
           </ion-col>
           <ion-col text-right>
-            <p>Valor: R$ {{ orcamento.total }} </p>
+            <p>Valor: {{ orcamento.total | currency:'BRL':"symbol":'1.2-2' }} </p>
               <ion-button color="light" (click)="selecionaOrcamento(orcamento)">
                 <ion-icon name="information-circle-outline"></ion-icon>
               </ion-button>
