@@ -3,7 +3,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ModalController, NavController, AlertController } from '@ionic/angular';
+import { ModalController, NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Subscription, fromEvent } from 'rxjs';
 import { text } from '@angular/core/src/render3';
 
@@ -24,7 +24,8 @@ export class ListaClientesPage implements OnInit {
     private _router: Router,
     private _modalController: ModalController,
     private _navController: NavController,
-    private _alertController: AlertController
+    private _alertController: AlertController,
+    private _loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -81,15 +82,22 @@ export class ListaClientesPage implements OnInit {
     await alerta.present();
   }
 
-  atualizaClientes() {
+  async atualizaClientes() {
+    const loading = await this._loadingController.create({
+      message: 'Carregando Clientes'
+    });
+    await loading.present();
+
     this._clienteService.listaClientes()
       .subscribe(
         data => {
           this.clientes = data;
+          loading.dismiss();
         },
         (err: HttpErrorResponse) => {
-          this._clienteService.clientesNaoCarregados();
           console.log(err);
+          loading.dismiss();
+          this._clienteService.clientesNaoCarregados();
         }
       );
   }

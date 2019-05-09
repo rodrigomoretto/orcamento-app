@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from 'src/app/models/produto';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,7 +17,8 @@ export class ListaProdutosPage implements OnInit {
 
   constructor(
     private _modalController: ModalController,
-    private _produtoService: ProdutoService
+    private _produtoService: ProdutoService,
+    private _loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -32,14 +33,22 @@ export class ListaProdutosPage implements OnInit {
     this._modalController.dismiss(null);
   }
 
-  atualizaProdutos() {
+  async atualizaProdutos() {
+    const loading = await this._loadingController.create({
+      message: 'Carregando Produtos'
+    });
+    await loading.present();
+
     this._produtoService.listaProdutos()
       .subscribe(
         (produtos: Array<Produto>) => {
           this.produtos = produtos;
+          loading.dismiss();
         },
         (err: HttpErrorResponse) => {
           console.log(err);
+          loading.dismiss();
+          this._produtoService.produtosNaoCarregados();
         }
       );
   }
