@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Orcamento } from '../../models/orcamento';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { OrcamentoService } from '../../services/orcamento.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
@@ -13,12 +13,10 @@ import { Router, NavigationExtras } from '@angular/router';
 export class HomePage implements OnInit {
 
   public orcamentos: Orcamento[];
-  
 
   constructor(
     public navCtrl: NavController,
     private _loadingController: LoadingController,
-    private _alertController: AlertController,
     private _orcamentoService: OrcamentoService,
     private _router: Router
     ) { }
