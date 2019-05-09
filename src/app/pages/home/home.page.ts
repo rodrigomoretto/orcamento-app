@@ -3,7 +3,6 @@ import { Orcamento } from '../../models/orcamento';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { OrcamentoService } from '../../services/orcamento.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DetalhesOrcamentoPage } from '../detalhes-orcamento/detalhes-orcamento.page';
 import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
@@ -42,27 +41,40 @@ export class HomePage implements OnInit {
     this._router.navigate(['detalhes-orcamento'], navigationExtras);
   }
 
-  atualizaOrcamentos() {
+  async atualizaOrcamentos() {
+
+    const loading = await this._loadingCtrl.create({
+      message: 'Carregando Orçamentos'
+    });
+
+    await loading.present();
+
     this._orcamentoService.listaOrcamento()
       .subscribe(
         (orcamentos) => {
           this.orcamentos = orcamentos;
-          //loading.dismiss();
+          loading.dismiss();
         },
         (err: HttpErrorResponse) => {
           console.log(err);
 
-          //loading.dismiss();
+          loading.dismiss();
 
-          // this._alertCtrl.create({
-          //   title: 'Falha na conexão',
-          //   subTitle: 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!',
-          //   buttons: [
-          //     { text:'Ok' }
-          //   ]
-          // }).present();
+          this.criaAlerta('Falha na conexão', 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!');
         }
       );
+  }
+
+  async criaAlerta(header: string, message: string) {
+    const alerta = await this._alertCtrl.create({
+      header: header,
+      message: message,
+      buttons: [
+        { text:   'Ok' }
+      ]
+    });
+
+    await alerta.present();
   }
 
 }
