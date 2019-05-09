@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private _loadingCtrl: LoadingController,
-    private _alertCtrl: AlertController,
+    private _alertController: AlertController,
     private _orcamentoService: OrcamentoService,
     private _router: Router
     ) { }
@@ -60,21 +60,22 @@ export class HomePage implements OnInit {
 
           loading.dismiss();
 
-          this.criaAlerta('Falha na conexão', 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!');
+          this._orcamentoService.orcamentosNaoCarregados();
+          // this.criaAlerta('Falha na conexão', 'Nao foi possivel carregar a lista de orçamentos. Tente novamente mais tarde!');
         }
       );
   }
 
-  async criaAlerta(header: string, message: string) {
-    const alerta = await this._alertCtrl.create({
-      header: header,
-      message: message,
-      buttons: [
-        { text:   'Ok' }
-      ]
-    });
+  // async criaAlerta(header: string, message: string) {
+  //   const alerta = await this._alertController.create({
+  //     header: header,
+  //     message: message,
+  //     buttons: [
+  //       { text:   'Ok' }
+  //     ]
+  //   });
 
-    await alerta.present();
-  }
+  //   await alerta.present();
+  // }
 
 }

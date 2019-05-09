@@ -11,6 +11,7 @@ import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
 import { Orcamento } from 'src/app/models/orcamento';
 import { forEach } from '@angular/router/src/utils/collection';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
+import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
 @Component({
   selector: 'app-cadastro-orcamento',
@@ -47,6 +48,7 @@ export class CadastroOrcamentoPage implements OnInit {
     private _navController: NavController,
     private _modalController: ModalController,
     private _activatedRoute: ActivatedRoute,
+    private _alertaService: AlertaService,
     private _alertController: AlertController,
     private _orcamentoService: OrcamentoService
   ) { }
@@ -58,11 +60,14 @@ export class CadastroOrcamentoPage implements OnInit {
   cadastroOrcamento() {
 
     if (this.cliente.id === 0) {
-      this.mensageiro('Sem cliente', 'Selecione um cliente.');
+      // this.mensageiro('Sem cliente', 'Selecione um cliente.');
+      this._alertaService.criaAlerta('Sem cliente', 'Selecione um cliente.');
     } else if (this.vendedor.id === 0) {
-      this.mensageiro('Sem vendedor', 'Selecione um vendedor.');
+      // this.mensageiro('Sem vendedor', 'Selecione um vendedor.');
+      this._alertaService.criaAlerta('Sem vendedor', 'Selecione um vendedor.');
     } else if (this.produtosTotal === 0) {
-      this.mensageiro('Sem produtos', 'Selecione pelo menos um produto.');
+      // this.mensageiro('Sem produtos', 'Selecione pelo menos um produto.');
+      this._alertaService.criaAlerta('Sem produtos', 'Selecione pelo menos um produto.');
     }
 
     if (
@@ -92,10 +97,12 @@ export class CadastroOrcamentoPage implements OnInit {
       .subscribe(data => {
         console.log(data);
         console.log('Orcamento cadastrado');
-        this.mensageiro('Parabéns', 'Orçamento cadastrado com sucesso.');
+        // this.mensageiro('Parabéns', 'Orçamento cadastrado com sucesso.');
+        this._alertaService.criaAlerta('Parabéns', 'Orçamento cadastrado com sucesso.');
         this._navController.navigateRoot('home');
       }, error => {
-        this.mensageiro('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
+        // this.mensageiro('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
+        this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
         console.log('Erro ao cadastrar o orçamento', error);
       });
     }
@@ -167,19 +174,18 @@ export class CadastroOrcamentoPage implements OnInit {
     }
   }
 
-  async mensageiro(header: string, message: string) {
-    const alerta = await this._alertController.create({
-      header: header,
-      message: message,
-      buttons: [
-        {
-          text: 'Ok',
-          role: 'cancel'
-        },
-      ]
-    });
-    await alerta.present();
-  }
+  // async mensageiro(header: string, message: string) {
+  //   const alerta = await this._alertController.create({
+  //     header: header,
+  //     message: message,
+  //     buttons: [
+  //       {
+  //         text: 'Ok'
+  //       },
+  //     ]
+  //   });
+  //   await alerta.present();
+  // }
 
   async removeProduto(indice: number, produto: Produto) {
     console.log(produto);

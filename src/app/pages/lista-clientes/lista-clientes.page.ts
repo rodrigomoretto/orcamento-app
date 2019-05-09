@@ -88,6 +88,7 @@ export class ListaClientesPage implements OnInit {
           this.clientes = data;
         },
         (err: HttpErrorResponse) => {
+          this._clienteService.clientesNaoCarregados();
           console.log(err);
         }
       );

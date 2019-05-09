@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../models/cliente';
+import { AlertaService } from './alerta/alerta.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class ClienteService {
   _url: string;
 
   constructor(private _api: ApiService,
-    private _http: HttpClient) {
+    private _http: HttpClient,
+    private _alertaService: AlertaService
+  ) {
       this._url = this._api.url;
   }
 
@@ -24,5 +27,9 @@ export class ClienteService {
     };
     return this._http
       .post(this._url + 'cliente', clienteNovo);
+  }
+
+  clientesNaoCarregados() {
+    this._alertaService.criaAlerta('Falha na conexão', 'Não foi possível carregar os clientes. Tente novamente mais tarde');
   }
 }
