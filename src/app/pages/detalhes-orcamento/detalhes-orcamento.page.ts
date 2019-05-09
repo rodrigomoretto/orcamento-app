@@ -17,7 +17,6 @@ export class DetalhesOrcamentoPage {
       .subscribe(params => {
         if (this._router.getCurrentNavigation().extras.state) {
           this.orcamento = this._router.getCurrentNavigation().extras.state.orcamento;
-          // console.log(this.orcamento);
         }
       });
   }
