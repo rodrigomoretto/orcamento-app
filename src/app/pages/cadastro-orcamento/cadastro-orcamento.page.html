@@ -39,6 +39,7 @@
           <ion-item lines="none">
             <ion-label>Produtos</ion-label>
             <ion-button (click)="listaProdutos()" color="light">
+            <!-- <ion-button (click)="listaProdutos()" color="light" *ngIf="produtosTotal == 0"> -->
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-item>
@@ -57,8 +58,8 @@
                     <ion-button (click)="quantidadeProdutoMais(produto)" size="small" color="light">
                       <ion-icon name="add"></ion-icon>
                     </ion-button>
-                    <div>
-                      <ion-label start>{{ produto.quantidade }} </ion-label>
+                    <div class="quantidade-center">
+                      <ion-label>{{ produto.quantidade }} </ion-label>
                     </div>
                     <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="light">
                       <ion-icon name="remove"></ion-icon>
@@ -78,6 +79,11 @@
       </ion-row>
     </ion-grid>
   </form>
+  <!-- <ion-fab vertical="bottom" edge horizontal="end" slot="fixed">
+    <ion-fab-button color="light" *ngIf="produtosTotal != 0" (click)="listaProdutos()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 </ion-content>
 
 <ion-footer>

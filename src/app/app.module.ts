@@ -40,7 +40,7 @@ registerLocaleData(pt);
       useClass: IonicRouteStrategy
     },
     {
-      provide: LOCALE_ID,useValue: 'pt'
+      provide: LOCALE_ID, useValue: 'pt'
     },
     OrcamentoService
   ],
