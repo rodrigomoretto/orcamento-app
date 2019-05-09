@@ -27,6 +27,11 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.atualizaOrcamentos();
   }
+
+  ionViewWillEnter() {
+    this.atualizaOrcamentos();
+  }
+
   selecionaOrcamento(orcamento: Orcamento) {
 
     let navigationExtras: NavigationExtras = {

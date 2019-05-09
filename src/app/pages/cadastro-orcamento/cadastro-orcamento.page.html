@@ -39,7 +39,6 @@
           <ion-item lines="none">
             <ion-label>Produtos</ion-label>
             <ion-button (click)="listaProdutos()" color="light">
-            <!-- <ion-button (click)="listaProdutos()" color="light" *ngIf="produtosTotal == 0"> -->
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-item>
@@ -79,11 +78,6 @@
       </ion-row>
     </ion-grid>
   </form>
-  <!-- <ion-fab vertical="bottom" edge horizontal="end" slot="fixed">
-    <ion-fab-button color="light" *ngIf="produtosTotal != 0" (click)="listaProdutos()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
 </ion-content>
 
 <ion-footer>
