@@ -3,25 +3,37 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Detalhes do Orçamento</ion-title>
+    <ion-title>Detalhes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h3 padding>Data: {{ orcamento.data | date: 'dd/MM/yyyy' }}</h3>
- 
-  <h3 padding>Cliente: {{ orcamento.cliente.nome }}</h3>
-
-  <h3 padding>Produtos</h3>
+<ion-content class="ion-padding-horizontal">
   <ion-list>
-    <ion-card *ngFor="let produto of orcamento.itens">
-      <p>Nome: {{ produto.produto.titulo }}</p>
-      <p>Quantidade: {{ produto.quantidade }}</p>
-      <p>Valor: {{ produto.valor | currency:'BRL':"symbol":'1.2-2' }}</p>
-    </ion-card>
+    <ion-item>
+      <p class="paragrafo-atributos">Data: {{ orcamento.data | date: 'dd/MM/yyyy' }}</p>
+    </ion-item>
+ 
+    <ion-item>
+      <p class="paragrafo-atributos">Cliente: {{ orcamento.cliente.nome }}</p>
+    </ion-item>
+
+    <ion-item>
+      <p class="paragrafo-atributos">Produtos:</p>
+    </ion-item>
+
+    <ion-list class="card-pad">
+      <ion-card *ngFor="let produto of orcamento.itens" class="ion-padding-horizontal">
+        <p class="produto-detalhes">Nome: {{ produto.produto.titulo }}</p>
+        <p class="produto-detalhes">Quantidade: {{ produto.quantidade }}</p>
+        <p class="produto-detalhes">Valor: {{ produto.valor | currency:'BRL':"symbol":'1.2-2' }}</p>
+        <p class="produto-detalhes">Total: {{ (produto.valor) * (produto.quantidade) | currency:'BRL':"symbol":'1.2-2' }}</p>
+      </ion-card>
+    </ion-list>
+    
+    <ion-item lines="none">
+      <p class="paragrafo-atributos">Vendedor: {{ orcamento.vendedor.nome }} </p>
+    </ion-item>
   </ion-list>
-  
-  <h3 padding>Vendedor: {{ orcamento.vendedor.nome }} </h3>
 </ion-content>
 
 <ion-footer>
