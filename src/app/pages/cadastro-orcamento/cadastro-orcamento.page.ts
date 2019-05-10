@@ -69,7 +69,7 @@ export class CadastroOrcamentoPage implements OnInit {
       return;
     }
 
-    if (this.produtosTotal === 0) {
+    if (this.produtosTotal === 0 && this.produtos.length === 0) {
       this._alertaService.criaAlerta('Sem produtos', 'Por favor selecione pelo menos um produto.');
       return;
     }
