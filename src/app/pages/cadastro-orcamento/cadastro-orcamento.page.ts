@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { ListaClientesPage } from '../lista-clientes/lista-clientes.page';
 import { Cliente } from 'src/app/models/cliente';
-import { ActivatedRoute } from '@angular/router';
 import { Vendedor } from 'src/app/models/vendedor';
 import { ListaVendedoresPage } from '../lista-vendedores/lista-vendedores.page';
 import { Produto } from 'src/app/models/produto';
@@ -45,7 +44,6 @@ export class CadastroOrcamentoPage implements OnInit {
   constructor(
     private _navController: NavController,
     private _modalController: ModalController,
-    private _activatedRoute: ActivatedRoute,
     private _alertaService: AlertaService,
     private _alertController: AlertController,
     private _orcamentoService: OrcamentoService
@@ -56,49 +54,54 @@ export class CadastroOrcamentoPage implements OnInit {
   }
 
   cadastroOrcamento() {
+    if (this.cliente.id === 0 && this.vendedor.id === 0 && this.produtosTotal === 0) {
+      this._alertaService.criaAlerta('Campos Obrigatórios', 'Por favor preencha todos os campos.');
+      return;
+    }
 
     if (this.cliente.id === 0) {
-      this._alertaService.criaAlerta('Sem cliente', 'Selecione um cliente.');
-    } else if (this.vendedor.id === 0) {
-      this._alertaService.criaAlerta('Sem vendedor', 'Selecione um vendedor.');
-    } else if (this.produtosTotal === 0) {
-      this._alertaService.criaAlerta('Sem produtos', 'Selecione pelo menos um produto.');
+      this._alertaService.criaAlerta('Sem cliente', 'Por favor selecione um cliente.');
+      return;
     }
 
-    if (
-      this.cliente.id !== 0 &&
-      this.vendedor.id !== 0 &&
-      this.produtosTotal !== 0 &&
-      this.produtos !== null
-    ) {
-      let orcamento = {
-        cliente: this.cliente.id,
-        vendedor: this.vendedor.id,
-        total: this.produtosTotal,
-        produtos: []
-      };
-
-      this.produtos.forEach(produto => {
-        orcamento.produtos.push({
-          id: produto.id,
-          valor: produto.preco,
-          quantidade: produto.quantidade
-        });
-      });
-
-      console.log(orcamento);
-
-      this._orcamentoService.salvaOrcamento(orcamento)
-      .subscribe(data => {
-        console.log(data);
-        console.log('Orcamento cadastrado');
-        this._alertaService.criaAlerta('Parabéns', 'Orçamento cadastrado com sucesso.');
-        this._navController.navigateRoot('home');
-      }, error => {
-        this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
-        console.log('Erro ao cadastrar o orçamento', error);
-      });
+    if (this.vendedor.id === 0) {
+      this._alertaService.criaAlerta('Sem vendedor', 'Por favor selecione um vendedor.');
+      return;
     }
+
+    if (this.produtosTotal === 0) {
+      this._alertaService.criaAlerta('Sem produtos', 'Por favor selecione pelo menos um produto.');
+      return;
+    }
+
+
+    let orcamento = {
+      cliente: this.cliente.id,
+      vendedor: this.vendedor.id,
+      total: this.produtosTotal,
+      produtos: []
+    };
+
+    this.produtos.forEach(produto => {
+      orcamento.produtos.push({
+        id: produto.id,
+        valor: produto.preco,
+        quantidade: produto.quantidade
+      });
+    });
+
+    console.log(orcamento);
+
+    this._orcamentoService.salvaOrcamento(orcamento)
+    .subscribe(data => {
+      console.log(data);
+      console.log('Orcamento cadastrado');
+      this._alertaService.criaAlerta('Parabéns', 'Orçamento cadastrado com sucesso.');
+      this._navController.navigateRoot('home');
+    }, error => {
+      this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
+      console.log('Erro ao cadastrar o orçamento', error);
+    });
 
   }
 
