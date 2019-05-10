@@ -167,19 +167,6 @@ export class CadastroOrcamentoPage implements OnInit {
     }
   }
 
-  // async mensageiro(header: string, message: string) {
-  //   const alerta = await this._alertController.create({
-  //     header: header,
-  //     message: message,
-  //     buttons: [
-  //       {
-  //         text: 'Ok'
-  //       },
-  //     ]
-  //   });
-  //   await alerta.present();
-  // }
-
   async removeProduto(indice: number, produto: Produto) {
     console.log(produto);
     const alerta = await this._alertController.create({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Orcamento } from '../../models/orcamento';
 import { NavController, LoadingController } from '@ionic/angular';
 import { OrcamentoService } from '../../services/orcamento.service';
@@ -10,7 +10,7 @@ import { Router, NavigationExtras } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
   public orcamentos: Orcamento[];
 
@@ -20,10 +20,6 @@ export class HomePage implements OnInit {
     private _orcamentoService: OrcamentoService,
     private _router: Router
     ) { }
-
-  ngOnInit(): void {
-    this.atualizaOrcamentos();
-  }
 
   ionViewWillEnter() {
     this.atualizaOrcamentos();
