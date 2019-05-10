@@ -32,13 +32,6 @@ export class CadastroOrcamentoPage implements OnInit {
 
   produtosTotal: number = 0;
 
-  orcamento: Orcamento = {
-    cliente: 0,
-    vendedor: 0,
-    total: 0,
-    produtos: []
-  };
-
   quantidade: number = 1;
 
   constructor(
@@ -93,14 +86,14 @@ export class CadastroOrcamentoPage implements OnInit {
     console.log(orcamento);
 
     this._orcamentoService.salvaOrcamento(orcamento)
-    .subscribe(data => {
-      console.log(data);
-      console.log('Orcamento cadastrado');
-      this.cadastroRealizado();
-    }, error => {
-      this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
-      console.log('Erro ao cadastrar o orçamento', error);
-    });
+      .subscribe(data => {
+        console.log(data);
+        console.log('Orcamento cadastrado');
+        this.cadastroRealizado();
+      }, error => {
+        this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
+        console.log('Erro ao cadastrar o orçamento', error);
+      });
 
   }
 
