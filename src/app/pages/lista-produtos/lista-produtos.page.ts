@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, AlertController } from '@ionic/angular';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { Produto } from 'src/app/models/produto';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,13 +11,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ListaProdutosPage implements OnInit {
 
-  produto: Produto;
+  produto: Produto = {
+    id: 0,
+    preco: 0,
+    quantidade: 0,
+    titulo: ''
+  };
   produtos: Array<Produto>;
+  quantidade: number;
 
   constructor(
     private _modalController: ModalController,
     private _produtoService: ProdutoService,
-    private _loadingController: LoadingController
+    private _loadingController: LoadingController,
+    private _alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -42,6 +49,7 @@ export class ListaProdutosPage implements OnInit {
       .subscribe(
         (produtos: Array<Produto>) => {
           this.produtos = produtos;
+          console.log(this.produtos);
           loading.dismiss();
         },
         (err: HttpErrorResponse) => {
@@ -50,5 +58,48 @@ export class ListaProdutosPage implements OnInit {
           this._produtoService.produtosNaoCarregados();
         }
       );
+  }
+
+  async selecionaQuantidade(produto: Produto) {
+    console.log(produto);
+    console.log(this.produto);
+    const alerta = await this._alertController.create({
+      // header: 'Quantidade',
+      message: 'Informe a quantidade para ' + produto.titulo + '.',
+      inputs: [
+        {
+          name: 'quantia',
+          type: 'number',
+          min: 1
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Confirmar cancelar');
+          }
+        },
+        {
+          text: 'Selecionar',
+          handler: (data) => {
+            let quantiaData = parseFloat(data.quantia);
+            console.log(quantiaData);
+            if (quantiaData >= 1) {
+              console.log('nao nulo: ', quantiaData);
+            }
+            if (typeof data.quantia != null && data.quantia >= 1) {
+              console.log(data);
+              console.log(produto);
+              produto.quantidade = parseFloat(data.quantia);
+              console.log(produto.quantidade);
+              this.selecionaProduto(produto);
+            }
+          }
+        }
+      ]
+    });
+    await alerta.present();
   }
 }

@@ -46,7 +46,6 @@ export class ListaClientesPage{
       ],
       buttons: [
         {
-
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
@@ -58,7 +57,7 @@ export class ListaClientesPage{
           text: 'Salvar',
           handler: data => {
             console.log('Confirmar Salvar');
-            if(typeof data.nome != null) {
+            if (typeof data.nome != null) {
               this._clienteService.cadastraCliente(data.nome)
                 .subscribe(data => {
                   this.atualizaClientes();

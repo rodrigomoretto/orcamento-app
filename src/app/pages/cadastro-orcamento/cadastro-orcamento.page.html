@@ -13,7 +13,6 @@
       <ion-row>
         <ion-col class="ion-margin-top">
 
-
           <ion-item lines="none">
             <ion-label>Selecione um cliente</ion-label>
           </ion-item>
@@ -24,7 +23,6 @@
             </ion-button>
           </ion-item>
 
-
           <ion-item lines="none">
               <ion-label>Selecione um vendedor</ion-label>
             </ion-item>
@@ -34,7 +32,6 @@
                 <ion-icon name="arrow-round-forward"></ion-icon>
               </ion-button>
             </ion-item>
-
 
           <ion-item lines="none">
             <ion-label>Produtos</ion-label>
@@ -58,7 +55,7 @@
                       <ion-icon name="add"></ion-icon>
                     </ion-button>
                     <div class="quantidade-center">
-                      <ion-label>{{ produto.quantidade }} </ion-label>
+                      <ion-label> {{ produto.quantidade }} </ion-label>
                     </div>
                     <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="light">
                       <ion-icon name="remove"></ion-icon>
@@ -67,12 +64,13 @@
                       <ion-icon name="trash"></ion-icon>
                     </ion-button>
                   </ion-col>
-
+                  
                 </ion-row>
               </ion-grid>
             </ion-card>
           </ion-list>
 
+          <p>Total do Orçamento: {{ produtosTotal | currency:'BRL':"symbol":'1.2-2' }} </p>
 
         </ion-col>
       </ion-row>
@@ -82,7 +80,7 @@
 
 <ion-footer>
   <ion-toolbar>
-      <p>Total do Orçamento: {{ produtosTotal | currency:'BRL':"symbol":'1.2-2' }} </p>
+      
       <ion-button expand="full" (click)="formulario.ngSubmit.emit()" >Salvar Orçamento</ion-button>
   </ion-toolbar>
 </ion-footer>

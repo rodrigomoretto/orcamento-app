@@ -138,8 +138,9 @@ export class CadastroOrcamentoPage implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data != null) {
+          console.log(data.data);
           this.produto = data['data'];
-          this.produto.quantidade = 1;
+          // this.produto.quantidade = 1;
           this.produtos.push(this.produto);
           this.totalNaView();
         }

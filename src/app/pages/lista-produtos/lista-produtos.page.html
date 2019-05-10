@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-card *ngFor="let produto of produtos" (click)="selecionaProduto(produto)">
+    <ion-card *ngFor="let produto of produtos" (click)="selecionaQuantidade(produto)">
       <h5 padding>Nome: {{ produto.titulo }} </h5>
       <h5 padding>Preço: {{ produto.preco | currency:'BRL':"symbol":'1.2-2' }} </h5>
     </ion-card>
