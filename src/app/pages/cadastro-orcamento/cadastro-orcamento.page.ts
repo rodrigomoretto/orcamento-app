@@ -96,8 +96,7 @@ export class CadastroOrcamentoPage implements OnInit {
     .subscribe(data => {
       console.log(data);
       console.log('Orcamento cadastrado');
-      this._alertaService.criaAlerta('Parabéns', 'Orçamento cadastrado com sucesso.');
-      this._navController.navigateRoot('home');
+      this.cadastroRealizado();
     }, error => {
       this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
       console.log('Erro ao cadastrar o orçamento', error);
@@ -194,6 +193,22 @@ export class CadastroOrcamentoPage implements OnInit {
 
     this.totalNaView();
     console.log(this.produtos);
+  }
+
+  async cadastroRealizado () {
+    const alerta = await this._alertController.create({
+      header: 'Parabéns',
+      message: 'Orçamento cadastrado com sucesso.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this._navController.navigateRoot('home');
+          }
+        }
+      ]
+    });
+    await alerta.present();
   }
 
   totalNaView() {

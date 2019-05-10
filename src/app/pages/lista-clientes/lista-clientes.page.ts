@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ModalController, NavController, AlertController, LoadingController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista-clientes',
   templateUrl: './lista-clientes.page.html',
   styleUrls: ['./lista-clientes.page.scss'],
 })
-export class ListaClientesPage implements OnInit {
+export class ListaClientesPage{
 
   clientes: Cliente[];
   cliente: Cliente;
@@ -22,7 +21,7 @@ export class ListaClientesPage implements OnInit {
     private _loadingController: LoadingController
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.atualizaClientes();
   }
 
@@ -64,13 +63,13 @@ export class ListaClientesPage implements OnInit {
                 .subscribe(data => {
                   this.atualizaClientes();
                 }, error => {
+                  this._clienteService.clienteNaoCadastrado();
                   console.log('Erro ao cadastrar o cliemte', error);
                 });
               console.log('data nome cliente novo: ', data.nome);
             }
           }
         }
-
       ]
     });
     await alerta.present();

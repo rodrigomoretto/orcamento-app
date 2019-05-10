@@ -16,7 +16,9 @@ export class AlertaService {
       header: header,
       message: message,
       buttons: [
-        { text:   'Ok' }
+        {
+          text:   'Ok'
+        }
       ]
     });
 

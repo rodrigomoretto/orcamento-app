@@ -30,6 +30,14 @@ export class ClienteService {
   }
 
   clientesNaoCarregados() {
-    this._alertaService.criaAlerta('Falha na conexão', 'Não foi possível carregar os clientes. Tente novamente mais tarde');
+    this._alertaService.criaAlerta('Falha na conexão', 'Não foi possível carregar os clientes. Tente novamente mais tarde.');
+  }
+
+  clienteCadastrado() {
+    this._alertaService.criaAlerta('Parabéns', 'Cliente cadastrado com sucesso.');
+  }
+
+  clienteNaoCadastrado() {
+    this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o cliente. Tente novamente mais tarde.');
   }
 }

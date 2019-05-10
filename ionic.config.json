@@ -1,5 +1,7 @@
 {
   "name": "orcamento-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
