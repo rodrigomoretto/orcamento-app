@@ -7,37 +7,44 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding-horizontal">
+<ion-content>
   <ion-list>
-    <ion-item>
-      <p class="paragrafo-atributos">Data: {{ orcamento.data | date: 'dd/MM/yyyy' }}</p>
+    <ion-item lines="none" class="orcamento-detalhes">
+      <p class="paragrafo-atributos"><strong>Data:</strong> {{ orcamento.data | date: 'dd/MM/yyyy' }}</p>
     </ion-item>
  
-    <ion-item>
-      <p class="paragrafo-atributos">Cliente: {{ orcamento.cliente.nome }}</p>
+    <ion-item lines="none" class="orcamento-detalhes">
+      <p class="paragrafo-atributos"><strong>Cliente:</strong> {{ orcamento.cliente.nome }}</p>
     </ion-item>
 
-    <ion-item>
-      <p class="paragrafo-atributos">Produtos:</p>
+    <ion-item lines="none" class="orcamento-detalhes">
+      <p class="paragrafo-atributos"><strong>Vendedor:</strong> {{ orcamento.vendedor.nome }} </p>
     </ion-item>
 
-    <ion-list class="card-pad">
-      <ion-card *ngFor="let produto of orcamento.itens" class="ion-padding-horizontal">
-        <p class="produto-detalhes">Nome: {{ produto.produto.titulo }}</p>
-        <p class="produto-detalhes">Quantidade: {{ produto.quantidade }}</p>
-        <p class="produto-detalhes">Valor: {{ produto.valor | currency:'BRL':"symbol":'1.2-2' }}</p>
-        <p class="produto-detalhes">Total: {{ (produto.valor) * (produto.quantidade) | currency:'BRL':"symbol":'1.2-2' }}</p>
+    <ion-item lines="none" class="orcamento-detalhes">
+        <p class="paragrafo-atributos"><strong>Total:</strong> {{ orcamento.total | currency:'BRL':"symbol":'1.2-2' }}</p>
+    </ion-item>
+
+    <ion-item lines="none" class="orcamento-detalhes">
+        <p class="paragrafo-atributos"><strong>Produtos:</strong></p>
+      </ion-item>
+
+    <ion-list>
+      <ion-card *ngFor="let produto of orcamento.itens" class="produto-espaco">
+        <ion-grid>
+
+          <ion-row>
+            <ion-col>
+              <p class="produto-detalhes"><strong>Nome:</strong> {{ produto.produto.titulo }}</p>
+              <p class="produto-detalhes"><strong>Quantidade:</strong> {{ produto.quantidade }}</p>
+              <p class="produto-detalhes"><strong>Valor:</strong> {{ produto.valor | currency:'BRL':"symbol":'1.2-2' }}</p>
+              <p class="produto-detalhes"><strong>Total:</strong> {{ (produto.valor) * (produto.quantidade) | currency:'BRL':"symbol":'1.2-2' }}</p>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
       </ion-card>
     </ion-list>
     
-    <ion-item lines="none">
-      <p class="paragrafo-atributos">Vendedor: {{ orcamento.vendedor.nome }} </p>
-    </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-      <h3>Total: {{ orcamento.total | currency:'BRL':"symbol":'1.2-2' }}</h3>
-  </ion-toolbar>
-</ion-footer>

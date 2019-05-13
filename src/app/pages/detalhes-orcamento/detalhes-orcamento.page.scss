@@ -1,12 +1,26 @@
 .paragrafo-atributos {
     font-size: 18px;
-}
-
-.card-pad {
-    padding: 0px;
-    margin: -10px;
+    margin-top: 0px;
+    margin-bottom:  0px;
 }
 
 .produto-detalhes {
-    font-size: 12px;
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.orcamento-detalhes {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --min-height: 30px;
+}
+
+.produto-espaco {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.ios ion-list {
+    padding-top: 8px;
 }
