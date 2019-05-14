@@ -13,12 +13,6 @@ import { ProdutoService } from 'src/app/services/produto.service';
 })
 export class ListaProdutosPage implements OnInit {
 
-  produto: Produto = {
-    id: 0,
-    preco: 0,
-    quantidade: 0,
-    titulo: ''
-  };
   produtos: Array<Produto>;
   quantidade: number;
 
