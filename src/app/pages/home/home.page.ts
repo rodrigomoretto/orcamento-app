@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { Orcamento } from '../../models/orcamento';
 import { NavController, LoadingController } from '@ionic/angular';
-import { OrcamentoService } from '../../services/orcamento.service';
+import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
+
+import { Orcamento } from '../../models/orcamento';
+
+import { OrcamentoService } from '../../services/orcamento.service';
 
 @Component({
   selector: 'app-home',
@@ -49,10 +51,7 @@ export class HomePage {
           loading.dismiss();
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
-
           loading.dismiss();
-
           this._orcamentoService.orcamentosNaoCarregados();
         }
       );

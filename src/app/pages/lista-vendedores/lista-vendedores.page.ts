@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendedor } from 'src/app/models/vendedor';
-import { VendedorService } from 'src/app/services/vendedor.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalController, LoadingController } from '@ionic/angular';
+
+import { Vendedor } from 'src/app/models/vendedor';
+
+import { VendedorService } from 'src/app/services/vendedor.service';
 
 @Component({
   selector: 'app-lista-vendedores',

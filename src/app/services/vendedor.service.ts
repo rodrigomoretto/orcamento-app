@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api/api.service';
 import { HttpClient } from '@angular/common/http';
+
 import { Vendedor } from '../models/vendedor';
+
+import { ApiService } from './api/api.service';
 import { AlertaService } from './alerta/alerta.service';
 
 @Injectable({

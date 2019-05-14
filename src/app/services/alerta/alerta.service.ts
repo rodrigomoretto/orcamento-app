@@ -12,7 +12,6 @@ export class AlertaService {
 
   async criaAlerta(header: string, message: string) {
     const alerta = await this._alertController.create({
-
       header: header,
       message: message,
       buttons: [
@@ -21,7 +20,6 @@ export class AlertaService {
         }
       ]
     });
-
     await alerta.present();
   }
 

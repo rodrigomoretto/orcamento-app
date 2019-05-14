@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Cliente } from 'src/app/models/cliente';
-import { ClienteService } from 'src/app/services/cliente.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalController, AlertController, LoadingController } from '@ionic/angular';
+
+import { Cliente } from 'src/app/models/cliente';
+
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -47,16 +49,12 @@ export class ListaClientesPage{
       buttons: [
         {
           text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Confirmar cancelar');
-          }
+          role: 'cancel'
         },
 
         {
           text: 'Salvar',
           handler: data => {
-            console.log('Confirmar Salvar');
             if (typeof data.nome != null) {
               this._clienteService.cadastraCliente(data.nome)
                 .subscribe(data => {
@@ -65,7 +63,6 @@ export class ListaClientesPage{
                   this._clienteService.clienteNaoCadastrado();
                   console.log('Erro ao cadastrar o cliemte', error);
                 });
-              console.log('data nome cliente novo: ', data.nome);
             }
           }
         }

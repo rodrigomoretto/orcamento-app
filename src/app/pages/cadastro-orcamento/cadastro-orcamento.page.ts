@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
+
 import { ListaClientesPage } from '../lista-clientes/lista-clientes.page';
+import { ListaVendedoresPage } from '../lista-vendedores/lista-vendedores.page';
+import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
+
 import { Cliente } from 'src/app/models/cliente';
 import { Vendedor } from 'src/app/models/vendedor';
-import { ListaVendedoresPage } from '../lista-vendedores/lista-vendedores.page';
 import { Produto } from 'src/app/models/produto';
-import { ListaProdutosPage } from '../lista-produtos/lista-produtos.page';
-import { Orcamento } from 'src/app/models/orcamento';
+
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { AlertaService } from 'src/app/services/alerta/alerta.service';
 
@@ -83,16 +85,11 @@ export class CadastroOrcamentoPage implements OnInit {
       });
     });
 
-    console.log(orcamento);
-
     this._orcamentoService.salvaOrcamento(orcamento)
       .subscribe(data => {
-        console.log(data);
-        console.log('Orcamento cadastrado');
         this.cadastroRealizado();
       }, error => {
         this._alertaService.criaAlerta('Erro', 'Falha ao cadastrar o orçamento. Tente novamente mais tarde.');
-        console.log('Erro ao cadastrar o orçamento', error);
       });
 
   }
@@ -170,7 +167,6 @@ export class CadastroOrcamentoPage implements OnInit {
   }
 
   async removeProduto(indice: number, produto: Produto) {
-    console.log(produto);
     const alerta = await this._alertController.create({
       header: 'Aviso',
       message: 'Tem certeza que deseja remover o produto ' + produto.titulo + ' ?',
@@ -182,7 +178,6 @@ export class CadastroOrcamentoPage implements OnInit {
         {
           text: 'Sim',
           handler: () => {
-            console.log(indice);
             this.produtos.splice(indice, 1);
             this.totalNaView();
           }
@@ -192,7 +187,6 @@ export class CadastroOrcamentoPage implements OnInit {
     await alerta.present();
 
     this.totalNaView();
-    console.log(this.produtos);
   }
 
   async cadastroRealizado() {
