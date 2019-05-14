@@ -138,14 +138,20 @@ export class CadastroOrcamentoPage implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
         if (data.data != null) {
-          console.log(data.data);
+          let count = 0;
           this.produto = data['data'];
-          // this.produto.quantidade = 1;
-          this.produtos.push(this.produto);
+          this.produtos.forEach((produto) => {
+            if (produto.id === this.produto.id) {
+              produto.quantidade += this.produto.quantidade;
+              count++;
+            }
+          });
+          if(count === 0){
+            this.produtos.push(this.produto);
+          }
           this.totalNaView();
         }
       });
-
     return await modal.present();
   }
 
@@ -189,7 +195,7 @@ export class CadastroOrcamentoPage implements OnInit {
     console.log(this.produtos);
   }
 
-  async cadastroRealizado () {
+  async cadastroRealizado() {
     const alerta = await this._alertController.create({
       header: 'Parabéns',
       message: 'Orçamento cadastrado com sucesso.',
