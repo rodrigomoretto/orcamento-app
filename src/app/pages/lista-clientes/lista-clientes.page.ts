@@ -13,8 +13,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class ListaClientesPage{
 
-  clientes: Cliente[];
-  cliente: Cliente;
+  clientes: Array<Cliente>;
 
   constructor(
     private _clienteService: ClienteService,
@@ -79,8 +78,8 @@ export class ListaClientesPage{
 
     this._clienteService.listaClientes()
       .subscribe(
-        data => {
-          this.clientes = data;
+        (clientes: Array<Cliente>) => {
+          this.clientes = clientes;
           loading.dismiss();
         },
         (err: HttpErrorResponse) => {

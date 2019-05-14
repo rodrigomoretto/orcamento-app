@@ -13,8 +13,7 @@ import { VendedorService } from 'src/app/services/vendedor.service';
 })
 export class ListaVendedoresPage implements OnInit {
 
-  vendedores: Vendedor[];
-  vendedor: Vendedor
+  vendedores: Array<Vendedor>;
 
   constructor(
     private _vendedorService: VendedorService,
@@ -42,7 +41,7 @@ export class ListaVendedoresPage implements OnInit {
 
     this._vendedorService.listaVendedores()
       .subscribe(
-        (vendedores) => {
+        (vendedores: Array<Vendedor>) => {
           this.vendedores = vendedores;
           loading.dismiss();
         },
