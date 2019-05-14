@@ -18,7 +18,7 @@
           </ion-item>
           <ion-item lines="none">
             <p> {{ cliente.nome }} </p>
-            <ion-button slot="end" (click)="listaClientes()" color="light">
+            <ion-button slot="end" (click)="listaClientes()" color="success">
               <ion-icon name="arrow-round-forward"></ion-icon>
             </ion-button>
           </ion-item>
@@ -28,7 +28,7 @@
           </ion-item>
           <ion-item lines="none">
             <p> {{ vendedor.nome }} </p>
-            <ion-button slot="end" (click)="listaVendedores()" color="light">
+            <ion-button slot="end" (click)="listaVendedores()" color="success">
               <ion-icon name="arrow-round-forward"></ion-icon>
             </ion-button>
           </ion-item>
@@ -39,7 +39,7 @@
 
           <ion-item lines="none" class="espaco-detalhes">
             <p><strong>Produtos</strong></p>
-            <ion-button slot="end" (click)="listaProdutos()" color="light">
+            <ion-button slot="end" (click)="listaProdutos()" color="success">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-item>
@@ -55,16 +55,16 @@
                   </ion-col>
 
                   <ion-col class="alinhar-direita">
-                    <ion-button (click)="quantidadeProdutoMais(produto)" size="small" color="light">
+                    <ion-button (click)="quantidadeProdutoMais(produto)" size="small" color="primary">
                       <ion-icon name="add"></ion-icon>
                     </ion-button>
                     <div class="quantidade-center">
                       <ion-label> {{ produto.quantidade }} </ion-label>
                     </div>
-                    <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="light">
+                    <ion-button (click)="quantidadeProdutoMenos(produto)" size="small" color="primary">
                       <ion-icon name="remove"></ion-icon>
                     </ion-button>
-                    <ion-button size="small" color="light" (click)="removeProduto(key, produto)">
+                    <ion-button size="small" color="danger" (click)="removeProduto(key, produto)">
                       <ion-icon name="trash"></ion-icon>
                     </ion-button>
                   </ion-col>
@@ -81,5 +81,8 @@
       </ion-row>
     </ion-grid>
   </form>
-  <ion-button expand="full" (click)="formulario.ngSubmit.emit()" >Salvar Orçamento</ion-button>
 </ion-content>
+
+<ion-footer>
+    <ion-button expand="full" (click)="formulario.ngSubmit.emit()" class="salva-button">Salvar Orçamento</ion-button>
+</ion-footer>
