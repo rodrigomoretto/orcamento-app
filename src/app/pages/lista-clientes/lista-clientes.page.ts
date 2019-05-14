@@ -76,7 +76,7 @@ export class ListaClientesPage{
     });
     await loading.present();
 
-    this._clienteService.listaClientes()
+    await this._clienteService.listaClientes()
       .subscribe(
         (clientes: Array<Cliente>) => {
           this.clientes = clientes;
